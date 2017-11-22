@@ -45,6 +45,7 @@ public class NFCReaderActivity extends AppCompatActivity {
         tvTag = (TextView) findViewById(R.id.tvTag);
         Log.d(TAG, "onCreate: " + getIntent().getAction());
         Log.d(TAG, "onCreate: " + getIntent().getParcelableExtra(NfcAdapter.EXTRA_TAG));
+
         Parcelable[] rawMessages = getIntent().getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
         if (rawMessages != null) {
             NdefMessage[] messages = new NdefMessage[rawMessages.length];
