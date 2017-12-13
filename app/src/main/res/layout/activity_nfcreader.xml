@@ -10,6 +10,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:id="@+id/tvTag"
-        android:text="Rishabh Khanna"
+        android:text="Light"
         />
 </LinearLayout>
