@@ -1,15 +1,19 @@
 package me.rishabhkhanna.nfc;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.MifareUltralight;
 import android.os.Parcelable;
+import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -37,9 +41,28 @@ public class NFCReaderActivity extends AppCompatActivity {
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             Log.d(TAG, "onNewIntent: " + tag);
         }
+        Toast.makeText(this, "new tag", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onNewIntent: ");
         tvTag = (TextView) findViewById(R.id.tvTag);
         tvTag.setText(String.valueOf(tag));
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("Wheel char detected")
+                .setPositiveButton("switch on", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        
+                    }
+                }).setNegativeButton("switch off", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                
+            }
+        }).show();
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setSmallIcon()
+        
+        
     }
 
     @Override
