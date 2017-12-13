@@ -1,5 +1,7 @@
 package me.rishabhkhanna.nfc;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NdefMessage;
@@ -26,6 +28,7 @@ public class NFCReaderActivity extends AppCompatActivity {
 
     public static final String TAG = "NFC";
     TextView tvTag;
+    
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -45,24 +48,6 @@ public class NFCReaderActivity extends AppCompatActivity {
         Log.d(TAG, "onNewIntent: ");
         tvTag = (TextView) findViewById(R.id.tvTag);
         tvTag.setText(String.valueOf(tag));
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("Wheel char detected")
-                .setPositiveButton("switch on", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        
-                    }
-                }).setNegativeButton("switch off", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                
-            }
-        }).show();
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setSmallIcon()
-        
-        
     }
 
     @Override
@@ -83,6 +68,32 @@ public class NFCReaderActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate: " + s);
         }
         Log.d(TAG, "onCreate: " + tag.describeContents());
+        
+//         dialog and notification code from here
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("Wheel char detected")
+                .setPositiveButton("switch on", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        tvTag.setText("Light switched ON");
+                    }
+                }).setNegativeButton("switch off", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                tvTag.setText("Light switched OFF");
+            }
+        }).show();
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.rasp)
+                .setContentTitle("Wheel chair detected")
+                .setContentText("Wheel chair has entered the Room");
+                
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        
+        notificationManager.notify(123, builder.build());
 
     }
 
